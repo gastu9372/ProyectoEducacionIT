@@ -7,6 +7,9 @@ class MenuItem:
         self.nombre = nombre
         self.precio = precio
 
+    def __str__(self):
+        return f"{self.id} - {self.nombre} ${self.precio}"
+
 # Defino los ítems que siempre existen
 MENU_ITEMS = [
     MenuItem("S", "Combo Simple", 5),
@@ -14,3 +17,4 @@ MENU_ITEMS = [
     MenuItem("T", "Combo Triple", 7),
     MenuItem("F", "McFlurby", 2)
 ]
+
