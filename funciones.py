@@ -33,30 +33,31 @@ def nombre_cliente():
         print('Nombre Invalido. El nombre no puede contener numeros')
 
 
-# def nuevo_pedido():
-#     opcion = elegir_opcion()
-#     cliente = nombre_cliente()
-#     pedido = {}
-#     print(opcion, cliente)
-    # while True:
-    #     codigo = input('Seleccionar el codigo de item a agregar...: ')
-    #     if codigo in ITEMS:
-    #         cant = input()
+def nuevo_pedido():
+    opcion = elegir_opcion()
+    cliente = nombre_cliente()
+    pedido = {}
+    print(opcion, cliente)
+    while True:
+        codigo = input('Seleccionar el codigo de item a agregar...: ')
+        if codigo in ITEMS:
+            cant = input()
 
 
 # Funcion que contiene a las demas funciones y funciona como contenedora
 def inicio():
-    encargado = validar_encargado()
-    opcion = elegir_opcion()
+    encargado = validar_encargado() # Primero verificamos encargardo sea valido
     while True:
-    if opcion == 1:
-        break
-    elif opcion == 2:
-        break
-    elif opcion == 3:
-        break
-    else: 
-        print('Opcion invalida, vuelva a ingresar')
+        opcion = elegir_opcion() # Pedimos que seleccione que hara
+        if opcion == '1': # Nuevo pedido
+            nuevo_pedido()
+        elif opcion == '2': # Cambio de turno, se vuelve a validar el empleado y se debe repetir el ciclo 
+            validar_encargado()
+        elif opcion == '3': # Corta la secuencia
+            print('Apagando...')
+            break
+        else: 
+            print('Opcion invalida, vuelva a ingresar')
 
 inicio()
     
