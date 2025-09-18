@@ -6,11 +6,15 @@ class InfoEmpleado:
         self.nombre = nombre
         self.apellido = apellido
     
-
+# Con esto hacemos que cuando se pida la info de un empleado se vea prolijo y no como una direccion de memoria
     def __str__(self):
         return f"{self.dni} - {self.nombre} {self.apellido}"
+    
+     # Para que en dicts/lists se vea lindo
+    def __repr__(self):
+        return self.__str__()
 
-EMPLADOS = [
+EMPLEADOS = [
     InfoEmpleado('12345678', 'Nahuel', 'Soria'),
     InfoEmpleado('12345679', 'Gonzalo', 'Turati'),
     InfoEmpleado('12345698', 'Luis', 'Castillo'),

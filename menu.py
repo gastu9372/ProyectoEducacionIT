@@ -7,8 +7,13 @@ class MenuItem:
         self.nombre = nombre
         self.precio = precio
 
+# Con esto hacemos que cuando se pida la info del menu se vea prolijo y no como una direccion de memoria
     def __str__(self):
         return f"{self.id} - {self.nombre} ${self.precio}"
+
+     # Para que en dicts/lists se vea lindo
+    def __repr__(self):
+        return self.__str__()
 
 # Defino los ítems que siempre existen
 MENU_ITEMS = [
