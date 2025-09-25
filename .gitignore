@@ -3,3 +3,6 @@ __pycache__/
 .vscode
 ventas.txt
 registro.txt
+comercio.sqlite
+*.sqlite
+*.db

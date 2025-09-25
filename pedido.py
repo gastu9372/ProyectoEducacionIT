@@ -1,5 +1,6 @@
 from datetime import datetime
 from menu import MENU_ITEMS
+from bbddmanager import DBManager
 
 ITEMS = {item.id: item for item in MENU_ITEMS}
 
@@ -39,3 +40,14 @@ class Pedido:
         linea = f"{self.cliente};{self.fecha};{combo_s};{combo_d};{combo_t};{flurby};${self.total}\n"
         with open(archivo, "a", encoding="utf-8") as f:
             f.write(linea)
+    
+    def guardar_en_db(self, db: DBManager):
+        combo_s = self.items.get("S", 0)
+        combo_d = self.items.get("D", 0)
+        combo_t = self.items.get("T", 0)
+        flurby  = self.items.get("F", 0)
+
+        db.insertar(
+            "INSERT INTO venta (cliente, fecha, ComboS, ComboD, ComboT, Flurby, total, encargado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            (self.cliente, self.fecha, combo_s, combo_d, combo_t, flurby, self.total, self.encargado)
+        )
