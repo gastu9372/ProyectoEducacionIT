@@ -1,6 +1,17 @@
 from datetime import datetime
 from menu import MENU_ITEMS
 from bbddmanager import DBManager
+import requests
+
+def consultar_dolar():
+    try:
+        r = requests.get("https://api.bluelytics.com.ar/v2/latest")
+        data = r.json()
+        return data["blue"]["value_sell"]  # dólar blue venta
+    except Exception:
+        return 1000.0  # valor fijo de fallback
+
+
 
 ITEMS = {item.id: item for item in MENU_ITEMS}
 
@@ -18,15 +29,17 @@ class Pedido:
             raise ValueError("Código inválido de producto")
         item = ITEMS[codigo]
         self.items[codigo] = self.items.get(codigo, 0) + cantidad
-        self.total += item.precio * cantidad
-        print(f"Agregado {cantidad}x {item.nombre} (${item.precio} c/u)")
+        valor_dolar = consultar_dolar()
+        self.total += item.precio * cantidad * valor_dolar
+        print(f"Agregado {cantidad}x {item.nombre} (${item.precio * valor_dolar} c/u)")
         print(f"Subtotal: ${self.total}")
 
     def mostrar_resumen(self):
+        valor_dolar = consultar_dolar()
         print(f"\nPedido de {self.cliente} (Encargado: {self.encargado})")
         for codigo, cantidad in self.items.items():
             item = ITEMS[codigo]
-            print(f" - {cantidad}x {item.nombre} (${item.precio} c/u)")
+            print(f" - {cantidad}x {item.nombre} (${item.precio * valor_dolar} c/u)")
         print(f"TOTAL: ${self.total}")
 
 

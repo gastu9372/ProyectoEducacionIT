@@ -6,3 +6,10 @@ registro.txt
 comercio.sqlite
 *.sqlite
 *.db
+.venv/
+/build/
+/dist/
+*.spec
+*.exe
+
+

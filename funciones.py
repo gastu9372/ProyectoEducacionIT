@@ -1,4 +1,4 @@
-from datetime import datetime
+import requests
 from menu import MENU_ITEMS
 from encargados import EMPLEADOS, Encargado
 from bbddmanager import DBManager
@@ -19,7 +19,6 @@ def validar_encargado(db):
             return encargado
         else:
             print("Error. No se encuentra el encargado, vuelva a ingresar.")
-
 
 
 ##  Funcion para elegir la opicion
@@ -90,11 +89,11 @@ def guardar_en_db(self, db: DBManager):
     combo_d = self.items.get("D", 0)
     combo_t = self.items.get("T", 0)
     flurby  = self.items.get("F", 0)
-
     db.insertar(
         "INSERT INTO venta (cliente, fecha, ComboS, ComboD, ComboT, Flurby, total) VALUES (?, ?, ?, ?, ?, ?, ?)",
         (self.cliente, self.fecha, combo_s, combo_d, combo_t, flurby, self.total)
     )
+
 
 
 
